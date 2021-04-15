@@ -33,4 +33,6 @@ urlpatterns = [
     path("esewa_verify/", EsewaVerifyView.as_view(), name="esewa_verify"),
 
     path('scanner', include('scanner.urls')),
+
+    path('api/', include('api.urls')),
 ]

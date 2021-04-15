@@ -40,9 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'scanner',
+    'api',
 
     'crispy_forms',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

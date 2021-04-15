@@ -3,6 +3,7 @@ import pyzbar.pyzbar as pyzbar
 import cv2
 import numpy
 from gym.models import Attendance, Member
+import datetime
 # Create your views here.
 
 
@@ -25,16 +26,19 @@ def scanner_view(request):
         if key == 27:
             cv2.destroyAllWindows()
             cap.release()
+
     # attendance logic
     user = Member.objects.get(contact=num)
     print(user.id)
     print(user.name)
     user.attendance = True
     user.save()
-    # print("Gender:", user.profile_set.all())
 
     context = {'scan': 'QR Successfully Scanned',
-               'phone_number': decoded,
-               'user': user
+               'name': user.name,
+               'phone_number': num,
+               'user': user,
+               'date_day': datetime.datetime.now(),
+               'status': user.attendance
                }
     return render(request, 'scanner/scanner.html', context)

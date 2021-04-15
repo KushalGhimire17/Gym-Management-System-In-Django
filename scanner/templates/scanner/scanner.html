@@ -1,9 +1,27 @@
 {% extends "navigation.html" %}
 {% load static %}
 
-{% block content %}
-{{scan}}
-{{phone_number}}
+{% block body %}
 
+<div class="container">
+    <div class="row">
+        <div class="col-6 col-sm-3">
+            <mark> {{scan}} </mark>
+        </div>
+        <div class="col-6 col-sm-3">
+            <h1 class="lead"><strong>
+                    NAME : {{name}}
+                </strong></h1>
+            <strong>
+                <h2>CONTACT : {{phone_number}}</h2>
+            </strong>
+        </div>
 
-{% endblock content%}
+        <!-- Force next columns to break to new line -->
+        <div class="w-100 lead"></div>
+
+        <div class="col-6 col-sm-3">Date: {{date.day}}</div>
+        <div class="col-6 col-sm-3">Status: {{status}}</div>
+    </div>
+</div>
+{% endblock body %}
