@@ -112,11 +112,11 @@
                     <a class="dropdown-item" href="/view_member">View Member</a>
                 </div>
             </li>
-            <li class="scroll"><a href="/logout">Logout</a></li>
+            <li class="scroll ml-5 my-3 "><a href="/logout">Logout</a></li>
             {% endif %}
             {% if request.user.is_authenticated %}
             {% else %}
-            <li class="scroll"><a href="/admin_login">Login</a></li>
+            <li class="scroll ml-5 my-3"><a href="/admin_login">Login</a></li>
             {% endif %}
         </ul>
     </div>
