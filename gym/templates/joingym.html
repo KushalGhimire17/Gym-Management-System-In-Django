@@ -28,9 +28,15 @@
         <input type="date" name="joindate" class="form-control">
         <label for=""><b>Expirey Date</b></label>
         <input type="date" name="expdate" value="2022/12/12" class="form-control">
-        <label for=""><b>Initial Amount</b></label>
+        <!-- <label for=""><b>Initial Amount</b></label>
         <input type="text" name="initialamount" class="form-control">
-        <br>
+        <br> -->
+        <!-- <label for=""><b>Attendance</b></label>
+        <select name="attendance" class="form-control">
+            {% for i in attendance %}
+            <option value="{{i.status}}">{{i.status}}</option>
+            {% endfor %}
+            <br> -->
         <input type="submit" value="Submit" class="btn btn-primary">
     </form>
 </div>

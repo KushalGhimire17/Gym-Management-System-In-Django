@@ -193,6 +193,9 @@ def join_gym(request):
     plan1 = Plan.objects.all()
     if request.method == 'POST':
         form = MemberForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            print(name)
         n = request.POST['name']
         c = request.POST['contact']
         e = request.POST['emailid']
@@ -201,14 +204,13 @@ def join_gym(request):
         p = request.POST['plan']
         joindate = request.POST['joindate']
         expiredate = request.POST['expdate']
-        initialamount = request.POST['initialamount']
+        # initialamount = request.POST['initialamount']
         plan = Plan.objects.filter(name=p).first()
 
         try:
             m = Member.objects.create(name=n, contact=c, emailid=e, age=a, gender=g, plan=plan,
-                                      joindate=joindate, expiredate=expiredate, initialamount=initialamount)
+                                      joindate=joindate, expiredate=expiredate, initialamount=0)
             error = "no"
-            m.save()
             o_id = m.id
             print("Order id: ", o_id)
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from gym.views import *
 
 urlpatterns = [
@@ -31,4 +31,6 @@ urlpatterns = [
 
     path("esewa_request/", EsewaRequestView.as_view(), name="esewa_request"),
     path("esewa_verify/", EsewaVerifyView.as_view(), name="esewa_verify"),
+
+    path('scanner', include('scanner.urls')),
 ]

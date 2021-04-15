@@ -40,6 +40,11 @@ class Plan(models.Model):
         return self.name
 
 
+class Attendance(models.Model):
+    date = models.DateTimeField(auto_now_add=True, blank=False, null=True)
+    status = models.BooleanField(default=False)
+
+
 class Member(models.Model):
     id = models.AutoField(unique=True, verbose_name='ID',
                           serialize=False,
@@ -56,6 +61,7 @@ class Member(models.Model):
         max_length=40, default=datetime.datetime.now() + datetime.timedelta(days=30))
     initialamount = models.CharField(max_length=10)
     qr_code = models.ImageField(upload_to='qr_codes', blank=True)
+    attendance = models.BooleanField(default=False)
 
     def set_expiry_date(self):
         return self.joindate.date() + datetime.timedelta(days=2)
@@ -74,10 +80,3 @@ class Member(models.Model):
         self.qr_code.save(fname, File(buffer), save=False)
         canvas.close()
         super().save(*args, **kwargs)
-
-
-class Order(models.Model):
-    name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='order')
-    price = models.DecimalField(decimal_places=2, max_digits=12)
-    quantity = models.PositiveIntegerField(default=1)
