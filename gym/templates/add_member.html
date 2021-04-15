@@ -1,0 +1,72 @@
+{% extends 'navigation.html' %}
+{% block body %}
+<div class="container" style="margin-top: 60px;">
+    <h3 class="text-center text-primary font-weight-bold">Add Member</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for=""><b>Name</b></label>
+        <input type="text" name="name" class="form-control">
+        <label for=""><b>Contact</b></label>
+        <input type="tel" name="contact" class="form-control">
+        <label for=""><b>Email Id</b></label>
+        <input type="email" name="emailid" class="form-control">
+        <label for=""><b>Age</b></label>
+        <input type="text" name="age" class="form-control">
+        <br>
+        <label for=""><b>Gender</b></label>
+        <input type="radio" name="gender" value="male">Male
+        <input type="radio" name="gender" value="female">Female
+        <br>
+        <label for=""><b>Plan Name</b></label>
+        <select name="plan" class="form-control" id="">
+            {% for i in plan %}
+            <option value="{{i.name}}">{{i.name}}</option>
+            {% endfor %}
+
+        </select>
+        <label for=""><b>Join Date</b></label>
+        <input type="date" name="joindate" class="form-control">
+        <label for=""><b>Expirey Date</b></label>
+        <input type="date" name="expdate" class="form-control">
+        <label for=""><b>Initial Amount</b></label>
+        <input type="text" name="initialamount" class="form-control">
+        <br>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+</div>
+
+{% ifequal error "no" %}
+<script>
+    alert('Record Inserted Successfully');
+    window.location=("{% url 'view_member' %}")
+</script>
+{% endifequal %}
+{% ifequal error "yes" %}
+<script>
+    alert('Something went wrong, Try Again');
+</script>
+{% endifequal %}
+
+{% endblock%}
+
+{% block footer %}
+<footer id="footer" class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="text-white">Copyright @2021 | Gym Management System | All Rights Reserved</p>
+            </div>
+            <div class="col-sm-6">
+                <ul class="social-icons">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a  href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fa fa-github"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock%}

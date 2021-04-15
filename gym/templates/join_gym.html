@@ -1,0 +1,40 @@
+{% extends 'navigation.html' %}
+{% block body %}
+
+{% load crispy_forms_tags %}
+<div class="container">
+
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Register Member</legend>
+        <!-- {{ form|crispy }} -->
+
+        {{ form.name|as_crispy_field }}
+        {{ form.contact|as_crispy_field }}
+
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.emailid|as_crispy_field }}
+                {{ form.plan|as_crispy_field }}
+                {{ form.shift|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.gender|as_crispy_field }}
+                {{ form.age|as_crispy_field }}
+                <!-- {{ form.expiredate|as_crispy_field }} -->
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- <a href="{% url 'esewa_request'%}"> -->
+            <button class="btn btn-outline-info" type="submit">Join Gym</button>
+            <!-- </a> -->
+        </div>
+    </fieldset>
+
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+        </small>
+    </div>
+</div>
+{% endblock %}
