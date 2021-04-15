@@ -26,13 +26,15 @@ def scanner_view(request):
             cv2.destroyAllWindows()
             cap.release()
     # attendance logic
-    user = Member.objects.get(phone_number=num)
+    user = Member.objects.get(contact=num)
     print(user.id)
     print(user.name)
+    user.attendance = True
+    user.save()
     # print("Gender:", user.profile_set.all())
-    instance = Profile.objects.get(pk=user.id)
-    instance.attendance = True
-    instance.save()
+
     context = {'scan': 'QR Successfully Scanned',
-               'phone_number': decoded}
+               'phone_number': decoded,
+               'user': user
+               }
     return render(request, 'scanner/scanner.html', context)
