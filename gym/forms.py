@@ -17,4 +17,4 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = ['name', 'contact', 'emailid',
-                  'age', 'gender', 'plan', 'shift', 'joindate', 'expiredate']
+                  'age', 'gender', 'plan', 'shift', 'joindate', 'expiredate', 'attendance']

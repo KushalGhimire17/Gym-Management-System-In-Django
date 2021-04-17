@@ -13,12 +13,13 @@
         <br>
         <input type="submit" value="Submit" class="btn btn-primary">
     </form>
+    <br><br><br><br><br><br>
 </div>
 
 {% ifequal error "no" %}
 <script>
     alert('Record Inserted Successfully');
-    window.location=("{% url 'view_plan' %}")
+    window.location = ("{% url 'view_plan' %}")
 </script>
 {% endifequal %}
 {% ifequal error "yes" %}
@@ -50,7 +51,7 @@ text-align: center;
                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a  href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     <li><a href="#"><i class="fa fa-youtube"></i></a></li>
                     <li><a href="#"><i class="fa fa-github"></i></a></li>
                 </ul>

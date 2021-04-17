@@ -12,16 +12,40 @@
             <h1 class="lead"><strong>
                     NAME : {{name}}
                 </strong></h1>
+            <hr>
             <strong>
                 <h2>CONTACT : {{phone_number}}</h2>
             </strong>
         </div>
 
-        <!-- Force next columns to break to new line -->
-        <div class="w-100 lead"></div>
-
-        <div class="col-6 col-sm-3">Date: {{date.day}}</div>
-        <div class="col-6 col-sm-3">Status: {{status}}</div>
     </div>
-</div>
-{% endblock body %}
+
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Month</th>
+                <th scope="col">Day</th>
+                <th scope="col">Attendance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in '0123456789'|make_list %}
+
+
+            <tr>
+                <th scope="row">{{date.year}}</th>
+                <td>{{date.month}}</td>
+                <td>{{ forloop.counter }}</td>
+                <td>{{status}}</td>
+
+            </tr>
+            {% endfor %}
+            <!-- <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+        </tr> -->
+        </tbody>
+    </table>
+    {% endblock body %}

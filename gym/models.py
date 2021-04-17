@@ -61,7 +61,7 @@ class Member(models.Model):
         max_length=40, default=datetime.datetime.now() + datetime.timedelta(days=30))
     initialamount = models.CharField(max_length=10)
     qr_code = models.ImageField(upload_to='qr_codes', blank=True)
-    attendance = models.BooleanField(default=False)
+    attendance = models.ForeignKey(Attendance, on_delete=models.CASCADE)
 
     def set_expiry_date(self):
         return self.joindate.date() + datetime.timedelta(days=2)

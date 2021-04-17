@@ -33,6 +33,8 @@ urlpatterns = [
     path("esewa_verify/", EsewaVerifyView.as_view(), name="esewa_verify"),
 
     path('scanner', include('scanner.urls')),
+    path('calculate_calorie', calculate_calorie_burn,
+         name='calculate_calorie_burn'),
 
     path('api/', include('api.urls')),
 ]

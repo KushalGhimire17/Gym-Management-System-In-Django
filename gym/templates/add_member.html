@@ -31,14 +31,22 @@
         <label for=""><b>Initial Amount</b></label>
         <input type="text" name="initialamount" class="form-control">
         <br>
+        <label for=""><b>Attendance</b></label>
+        <select name="attendance" class="form-control" id="">
+            {% for i in attendance %}
+            <option value="{{i.status}}">{{i.status}}</option>
+            {% endfor %}
+        </select>
+        <br><br>
         <input type="submit" value="Submit" class="btn btn-primary">
     </form>
+    <br><br><br><br><br><br>
 </div>
 
 {% ifequal error "no" %}
 <script>
     alert('Record Inserted Successfully');
-    window.location=("{% url 'view_member' %}")
+    window.location = ("{% url 'view_member' %}")
 </script>
 {% endifequal %}
 {% ifequal error "yes" %}
@@ -61,7 +69,7 @@
                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a  href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     <li><a href="#"><i class="fa fa-youtube"></i></a></li>
                     <li><a href="#"><i class="fa fa-github"></i></a></li>
                 </ul>

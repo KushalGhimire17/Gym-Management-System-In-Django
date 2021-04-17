@@ -31,14 +31,13 @@ def scanner_view(request):
     user = Member.objects.get(contact=num)
     print(user.id)
     print(user.name)
-    user.attendance = True
-    user.save()
+    # user.save()
 
     context = {'scan': 'QR Successfully Scanned',
                'name': user.name,
                'phone_number': num,
                'user': user,
-               'date_day': datetime.datetime.now(),
+               'date': datetime.datetime.now(),
                'status': user.attendance
                }
     return render(request, 'scanner/scanner.html', context)

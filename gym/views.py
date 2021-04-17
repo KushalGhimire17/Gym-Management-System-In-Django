@@ -149,6 +149,7 @@ def Delete_Plan(request, pid):
 def Add_Member(request):
     error = ""
     plan1 = Plan.objects.all()
+    attendance1 = Attendance.objects.all()
     if not request.user.is_staff:
         return redirect('login')
     if request.method == 'POST':
@@ -161,14 +162,17 @@ def Add_Member(request):
         joindate = request.POST['joindate']
         expiredate = request.POST['expdate']
         initialamount = request.POST['initialamount']
+        at = request.POST['attendance']
         plan = Plan.objects.filter(name=p).first()
+        attendance = Attendance.objects.filter(date=at).first()
         try:
             Member.objects.create(name=n, contact=c, emailid=e, age=a, gender=g, plan=plan,
-                                  joindate=joindate, expiredate=expiredate, initialamount=initialamount)
+                                  joindate=joindate, expiredate=expiredate, initialamount=initialamount,
+                                  attendance=attendance)
             error = "no"
         except:
             error = "yes"
-    d = {'error': error, 'plan': plan1}
+    d = {'error': error, 'plan': plan1, 'attendance': attendance1}
     return render(request, 'add_member.html', d)
 
 
@@ -190,12 +194,10 @@ def join_gym(request):
     error = ""
     m = ""
     o_id = ""
+
     plan1 = Plan.objects.all()
+    attendance1 = Attendance.objects.all()
     if request.method == 'POST':
-        form = MemberForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            print(name)
         n = request.POST['name']
         c = request.POST['contact']
         e = request.POST['emailid']
@@ -204,23 +206,23 @@ def join_gym(request):
         p = request.POST['plan']
         joindate = request.POST['joindate']
         expiredate = request.POST['expdate']
-        # initialamount = request.POST['initialamount']
+        initialamount = request.POST['initialamount']
+        at = request.POST['attendance']
         plan = Plan.objects.filter(name=p).first()
-
+        attendance = Attendance.objects.filter(date=at).first()
         try:
-            m = Member.objects.create(name=n, contact=c, emailid=e, age=a, gender=g, plan=plan,
-                                      joindate=joindate, expiredate=expiredate, initialamount=0)
+            Member.objects.create(name=n, contact=c, emailid=e, age=a, gender=g, plan=plan,
+                                  joindate=joindate, expiredate=expiredate, initialamount=initialamount,
+                                  attendance=attendance)
             error = "no"
-            o_id = m.id
-            print("Order id: ", o_id)
-
         except:
             error = "yes"
+
         messages.success(request, f'Account created for {n}!')
         return render(request, 'esewa_request.html', {'o_id': o_id})
     else:
         form = MemberForm()
-    return render(request, 'joingym.html', {'form': form, 'error': error, 'plan': plan1, 'member_obj': m})
+    return render(request, 'joingym.html', {'form': form, 'error': error, 'plan': plan1, 'attendance': attendance1})
 
 # Payment Gateway View
 
@@ -263,3 +265,29 @@ class EsewaVerifyView(View):
         else:
 
             return redirect("/esewa_request/?o_id="+order_id)
+
+
+# Calorie Burn Calculation
+
+
+def calculate_calorie_burn(request):
+    context = {}
+    if request.method == 'POST':
+        age = request.POST['age']
+        weight = request.POST['weight']
+        height = request.POST['height']
+        gender = request.POST['gender']
+        activity_levels = request.POST['activity_levels']
+        a = float(age)
+        w = float(weight)
+        h = float(height)
+        al = float(activity_levels)
+        if gender == 'Male':
+            bmr_m = 66 + (6.2 * w) + (12.7 * h) - (6.76 * a)
+            bmr = bmr_m
+        else:
+            bmr_f = 655.1 + (4.35 * w) + (4.7 * h) - (4.7 * a)
+            bmr = bmr_f
+        calorie_burnt = bmr * al
+        context = {'calorie_burnt': calorie_burnt}
+    return render(request, 'calorie_calculator.html', context)
