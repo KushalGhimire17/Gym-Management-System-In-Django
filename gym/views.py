@@ -164,11 +164,18 @@ def Add_Member(request):
         initialamount = request.POST['initialamount']
         at = request.POST['attendance']
         plan = Plan.objects.filter(name=p).first()
-        attendance = Attendance.objects.filter(date=at).first()
+        attendance = Attendance.objects.filter(status=at).first()
         try:
             Member.objects.create(name=n, contact=c, emailid=e, age=a, gender=g, plan=plan,
                                   joindate=joindate, expiredate=expiredate, initialamount=initialamount,
                                   attendance=attendance)
+
+            m = Member.objects.get(contact=c)
+            year = m.get_year()
+            month = m.get_month()
+            day = m.get_day()
+            AttendanceReport.objects.create(
+                year=year, month=month, day=day, name=n, status=attendance)
             error = "no"
         except:
             error = "yes"
