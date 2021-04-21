@@ -26,26 +26,24 @@
                 <th scope="col">Year</th>
                 <th scope="col">Month</th>
                 <th scope="col">Day</th>
+                <th scope="col">Name</th>
                 <th scope="col">Attendance</th>
             </tr>
         </thead>
         <tbody>
-            {% for i in '0123456789'|make_list %}
 
 
             <tr>
                 <th scope="row">{{date.year}}</th>
                 <td>{{date.month}}</td>
-                <td>{{ forloop.counter }}</td>
+                <td>{{ date.day }}</td>
+                <td>{{ name }}</td>
                 <td>{{status}}</td>
 
+
             </tr>
-            {% endfor %}
-            <!-- <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr> -->
+
+
         </tbody>
     </table>
     {% endblock body %}

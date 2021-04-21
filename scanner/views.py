@@ -2,7 +2,7 @@ from django.shortcuts import render
 import pyzbar.pyzbar as pyzbar
 import cv2
 import numpy
-from gym.models import Attendance, Member
+from gym.models import Attendance, Member, AttendanceReport
 import datetime
 # Create your views here.
 
@@ -29,9 +29,13 @@ def scanner_view(request):
 
     # attendance logic
     user = Member.objects.get(contact=num)
-    print(user.id)
-    print(user.name)
-    # user.save()
+    n = user.name
+    attendance = user.attendance
+    year = user.get_year()
+    month = user.get_month()
+    day = user.get_day()
+    AttendanceReport.objects.create(
+        year=year, month=month, day=day, name=n, status=attendance)
 
     context = {'scan': 'QR Successfully Scanned',
                'name': user.name,
